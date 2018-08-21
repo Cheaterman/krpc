@@ -7,9 +7,9 @@ VALUE_TYPES = {
     KRPC.Type.DOUBLE: float,
     KRPC.Type.FLOAT: float,
     KRPC.Type.SINT32: int,
-    KRPC.Type.SINT64: long,
+    KRPC.Type.SINT64: int,
     KRPC.Type.UINT32: int,
-    KRPC.Type.UINT64: long,
+    KRPC.Type.UINT64: int,
     KRPC.Type.BOOL: bool,
     KRPC.Type.STRING: str,
     KRPC.Type.BYTES: bytes
@@ -237,7 +237,7 @@ class Types(object):
                              ' to type ' + str(typ))
         # Numeric types
         # See http://docs.python.org/2/reference/datamodel.html#coercion-rules
-        numeric_types = (float, int, long)
+        numeric_types = (float, int)
         if isinstance(value, bool) or \
            not any(isinstance(value, t) for t in numeric_types) or \
            typ.python_type not in numeric_types:
@@ -246,9 +246,7 @@ class Types(object):
                              ' to type ' + str(typ))
         if typ.python_type == float:
             return float(value)
-        elif typ.python_type == int:
-            return int(value)
-        return long(value)
+        return int(value)
 
 
 class TypeBase(object):
